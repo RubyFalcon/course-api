@@ -40,68 +40,17 @@ const db = new (class database {
           });
         }
       });
-  } /*
-  get(requirements, callback) {
-    let query = "SELECT ";
-    let preparedValues = [];
-    if (requirements.fields.length > 0 && requirements.fields[0] == "*") {
-      query += "*";
-    } else {
-      query += "??";
-      preparedValues.push(requirements.fields);
-    }
-    if (requirements.table != null) {
-      query += " FROM ??";
-      preparedValues.push(requirements.table);
-    } else {
-      callback({ result: false, msg: "No table given" });
-    }
-    if (requirements.where != null) {
-      if (Object.keys(requirements.where).length > 0) {
-        query += " WHERE ?";
-        preparedValues.push(requirements.where);
-      }
-    }
-    if (requirements.order != null) {
-      query += " ORDER BY ??";
-      preparedValues.push(requirements.order);
-    }
-    if (requirements.limit != null) {
-      query += " LIMIT ?";
-      preparedValues.push(requirements.limit);
-    }
-    //console.log(query);
-    //console.log(preparedValues);
-    //console.log(this.connection.format(query, preparedValues));
-    //Execute query if everything is succesfull
-    this.connection
-      .query(query, preparedValues)
-      .then(([rows]) => {
-        if (rows.length > 0) {
-          callback({ result: true, data: rows });
-        } else {
-          callback({ result: false });
-        }
-      })
-      .catch((err) => {
-        //Check if there was an error
-        if (err !== null) {
-          callback({
-            result: false,
-            err: "[DBController.js].get() Failed to query " + err,
-          });
-        }
-      });
-  }*/
+  }
 
   /** Select query
    *  @param {object} requirements Supports `fields`, `table`, `where`, `order`, `limit`
    *  @param {function} callback The callback function
-   */ /** Select query
+   */
+
+  /** Select query
    *  @param {object} requirements Supports `fields`, `table`, `where`, `order`, `limit`
    *  @param {function} callback The callback function
-   */
-  get(requirements, callback) {
+   */ get(requirements, callback) {
     let query = "SELECT ";
     let preparedValues = [];
 
@@ -175,13 +124,13 @@ const db = new (class database {
     //Execute update query
     //console.log(query);
     //console.log(preparedValues);
-    console.log(
-      this.connection.format("UPDATE ?? SET ? WHERE ?", [
-        table,
-        object,
-        condition,
-      ])
-    );
+    // console.log(
+    //   this.connection.format("UPDATE ?? SET ? WHERE ?", [
+    //     table,
+    //     object,
+    //     condition,
+    //   ])
+    // );
     this.connection
       .query("UPDATE ?? SET ? WHERE ?", [table, object, condition])
       .then(([rows]) => {

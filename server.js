@@ -1,10 +1,14 @@
 const { urlencoded } = require("express");
 const express = require("express");
 const cors = require("cors");
+
+//init  server and db
 const app = express();
 const port = 5000;
 const Database = require("./db/coursedb");
 Database.init();
+
+//import routes
 const Modules = require("./routes/modules");
 const user = require("./routes/user");
 const adminRoute = require("./routes/staff");
@@ -41,6 +45,7 @@ app.use((err, req, res, next) => {
   }
 });
 
+//startup server
 app.listen(port, () => console.log(`Server running at port ${port}`));
 
 //proper exit
