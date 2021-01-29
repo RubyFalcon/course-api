@@ -1,4 +1,5 @@
 const moment = require("moment");
+const validator = require("email-validator");
 
 module.exports = (req, res, next) => {
   if (req.body == null) {
@@ -32,6 +33,17 @@ module.exports = (req, res, next) => {
   if (DOB instanceof String) {
     responseObject.result = false;
     responseObject.msg.push("Date of Birth invalid");
+  }
+
+  const validEmail = validator.validate(req.body.email);
+  if (!validEmail) {
+    responseObject.result = false;
+    responseObject.msg.push("invalid email");
+  }
+
+  if (req.body.hashed_password.length <= 5) {
+    responseObject.result = false;
+    responseObject.msg.push("password is too short");
   }
 
   if (responseObject.result) {

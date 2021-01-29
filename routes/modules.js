@@ -97,7 +97,7 @@ Router.patch("/code/:id", (req, res) => {
 });
 
 Router.delete("/:code", (req, res) => {
-  db.delete("modules", { Module_Code: req.params.code }, (results) => {
+  db.delete("module", { Code: req.params.code }, (results) => {
     if (results.result) {
       res.status(200).json(results);
     } else {
